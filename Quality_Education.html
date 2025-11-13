@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AccessPoint: Quality Education for All</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo-link">
+            <img class="logo-image" src="logo.png" alt="BrightPath Learning Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#" class="donate-button">Home</a></li>
+                <li><a href="#homeschool-app-container" class="program-button">Homeschool</a></li>
+                <li><a href="https://docs.google.com/document/d/11TNjJbjpDcXa8nEgHAtxB46gQgeldzYtTT7YS6jFGow/edit?tab=t.0" class="nav-button">What quality edurcation is</a></li>
+                <li><a href="https://elmosoftware.com.au/products/learning-management?ELMO_Capterra_Source=capterra&utm_source=capterra&utm_medium=ppc&utm_campaign=learning-management-system&utm_content=product&gdmcid=e0d8d770-a9d3-4f00-b6a9-a7bbceef7820" class="nav-button" >About</a></li>
+                <li><a href="./files/video.mp4" class="nav-button">Video</a></li>
+                <li><a href="https://www.concern.net/" class="nav-button">Donate Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-content">
+            <h1>BrightPath Learning</h1>
+            <p class="hero-subtitle">Quality Education for All</p>
+            </div>
+        </section>
+
+
+        <section class="info-columns">
+            
+            <div class="columns-container">
+                
+                <div class="column">
+                    <img class="column-image" src="image_a5a2e8.png" alt="Stack of books and pencils in front of a chalkboard">
+                    <h2>Free Learning Tools</h2>
+                    <p>Discover a list of free, high-quality online courses, apps, and websites to help you learn new skills in about.</p>
+                </div>
+
+                <div class="column">
+                    <img class="column-image" src="download.jpg" alt ="person sitting down on a been bag using ipad">
+                    <h2>Local Support</h2>
+                    <p>Find libraries, community centers, and programs near you that offer free computer access and help.</p>
+                </div>
+
+                <div class="column">
+                    <img class="column-image" src="donating.jpg" alt="person handing a cup of donations to another person">
+                    <h2>donate now</h2>
+                    <p>Donate to those in need to make a difference and help someone.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="green-feature-section">
+            <div class="feature-container">
+                <div class="feature-left">
+                 <div class="feature-left"> <h2>For all</h2> </div> <div class="feature-right"> <h3>quality education</h3> <p> Education is very important in Australia without education we would have no jobs or be able too comunicate with each other therefour we can not grow any further. Eduration comes first here in BrightPath Learning were you can grow and get smart. Edurcation is Education is the process of acquiring knowledge and skills, but also involves personal development, and critical thinking. </p> <p> At BrightPath Learning, we believe that quality education should be accessible to everyone, regardless of their background or circumstances. Our mission is to provide engaging and effective learning experiences that empower individuals to reach their full potential. We are committed to fostering a love for learning and helping our students develop the skills they need to succeed in life. </p> </div>
+                    </p>
+                </div>
+                
+        </section>
+        <section id="homeschool-app-container">
+            <div class="app-content">
+                
+                <div class="app-screen active" id="student-login-screen">
+                    <img class="app-logo" src="logo.png" alt="BrightPath Learning Logo">
+                    <h2>Homeschool App</h2>
+                    <p>Welcome! Select your name or create a new student.</p>
+                    
+                    <label for="student-select" class="app-label">Returning Student:</label>
+                    <select id="student-select" class="app-input">
+                        <option value="">-- Select --</option>
+                    </select>
+                    
+                    <p>Or</p>
+                    
+                    <label for="new-student-name" class="app-label">New Student Name:</label>
+                    <input type="text" id="new-student-name" class="app-input" placeholder="Enter your name">
+                    
+                    <button id="login-button" class="app-button">Start Learning</button>
+                    
+                    <button id="reset-all-progress" class="app-button-danger">Reset All Progress</button>
+                </div>
+                
+                <div class="app-screen" id="main-menu-screen">
+                    <h2>Main Menu</h2>
+                    <p>Welcome, <strong id="student-name-display">Student</strong>!</p>
+                    <div class="menu-buttons">
+                        <button class="app-button menu-button" data-subject="math">🧮 Math</button>
+                        <button class="app-button menu-button" data-subject="spelling">✏️ Spelling</button>
+                        <button class="app-button menu-button" data-subject="pe">🤸 PE</button>
+                        <button class="app-button menu-button" data-subject="progress">📈 View Progress</button>
+                        <button id="logout-button" class="app-button-secondary">Change Student</button>
+                    </div>
+                </div>
+                
+                <div class="app-screen" id="year-select-screen">
+                    <h2>Select Year Level</h2>
+                    <p>What year are you in?</p>
+                    <div class="year-buttons">
+                        <button class="app-button year-button" data-year="1">Year 1</button>
+                        <button class="app-button year-button" data-year="2">Year 2</button>
+                        <button class="app-button year-button" data-year="3">Year 3</button>
+                        <button class="app-button year-button" data-year="4">Year 4</button>
+                        <button class="app-button year-button" data-year="5">Year 5</button>
+                        <button class="app-button year-button" data-year="6">Year 6</button>
+                    </div>
+                    <button class="app-button-secondary back-to-menu">Back to Menu</button>
+                </div>
+
+                <div class="app-screen" id="activity-screen">
+                    <h2 id="activity-title">Activity Title</h2>
+                    <div id="activity-content"></div>
+                    <div id="activity-result"></div>
+                    <div id="activity-nav"></div>
+                </div>
+                
+                <div class="app-screen" id="progress-screen">
+                    <h2>📈 Your Progress</h2>
+                    <div id="progress-content"></div>
+                    <button class="app-button-secondary back-to-menu">Back to Menu</button>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AccessPoint. A PYP Exhibition Project.</p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
