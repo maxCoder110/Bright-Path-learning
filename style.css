@@ -1,242 +1,1565 @@
-/* --- GLOBAL RESET --- */
-body { 
-    margin: 0; 
-    overflow: hidden; 
-    font-family: 'Segoe UI', Arial, sans-serif; 
-    background-color: #000; /* Default to black for the game */
+/* ======== GLOBAL & ACCESSIBILITY STYLES ======== */
+
+
+
+html {
+
+
+
+    scroll-behavior: smooth;
+
+
+
 }
 
-/* =========================================
-   LAYER 1: THE DISGUISE (Educational Theme)
-   ========================================= */
 
-#edu-layer {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: #f4f7f6; 
-    color: #333; 
-    z-index: 50;
-    display: flex; 
-    flex-direction: column;
-    transition: opacity 0.5s ease-in-out;
+
+
+
+
+
+body {
+
+
+
+    margin: 0;
+
+
+
+    padding: 0;
+
+
+
+    font-family: 'Poppins', Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+
+
+    font-size: 18px;
+
+
+
+    line-height: 1.6;
+
+
+
+    background-color: #f4f7f6;
+
+
+
+    color: #333;
+
+
+
 }
 
-/* Header */
+
+
+
+
+
+
+* {
+
+
+
+    box-sizing: border-box;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======== HEADER STYLES ======== */
+
+
+
 header {
-    background: #ffffff;
-    border-bottom: 3px solid #0056b3;
-    padding: 20px 40px;
-    display: flex; 
-    justify-content: space-between; 
+
+
+
+    display: flex;
+
+
+
+    justify-content: space-between;
+
+
+
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+
+
+    padding: 10px 40px;
+
+
+
+    background-color: #ffffff;
+
+
+
+    border-bottom: 1px solid #ddd;
+
+
+
+    position: sticky;
+
+
+
+    top: 0;
+
+
+
+    width: 100%;
+
+
+
+    z-index: 1000;
+
+
+
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+
+
 }
 
-.logo { 
-    font-size: 24px; 
-    font-weight: bold; 
-    color: #0056b3; 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
+
+
+
+
+
+
+/* --- IMPROVEMENT: Clickable logo link --- */
+
+
+
+.logo-link {
+
+
+
+    display: inline-block; /* Ensures it behaves correctly */
+
+
+
 }
 
-.logo span { 
-    color: #f5a623; /* Bright Path "Sun" color */
+
+
+
+
+
+
+.logo-image {
+
+
+
+    max-height: 50px;
+
+
+
+    width: auto;
+
+
+
+    display: block; /* Removes any extra space below the image */
+
+
+
 }
 
-/* Navigation */
-nav { 
-    display: flex; 
-    gap: 30px; 
+
+
+
+
+
+
+nav ul {
+
+
+
+    list-style: none;
+
+
+
+    margin: 0;
+
+
+
+    padding: 0;
+
+
+
+    display: flex;
+
+
+
+    align-items: center;
+
+
+
 }
 
-nav a { 
-    text-decoration: none; 
-    color: #555; 
-    font-weight: 500; 
-    cursor: pointer; 
-    transition: color 0.2s; 
+
+
+
+
+
+
+nav li {
+
+
+
+    margin-left: 25px;
+
+
+
 }
 
-nav a:hover { 
-    color: #0056b3; 
+
+
+
+
+
+
+nav a {
+
+
+
+    text-decoration: none;
+
+
+
+    color: #0056b3;
+
+
+
+    font-weight: 600;
+
+
+
+    padding: 5px;
+
+
+
+    border-radius: 4px;
+
+
+
+    transition: all 0.2s ease-in-out;
+
+
+
 }
 
-/* Dashboard Layout */
-.dashboard { 
-    padding: 40px; 
-    display: grid; 
-    grid-template-columns: 2fr 1fr; 
-    gap: 30px; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    width: 100%; 
-    box-sizing: border-box;
+
+
+
+
+
+
+/* --- IMPROVEMENT: Consistent hover lift on all nav links --- */
+
+
+
+nav a:hover, nav a:focus {
+
+
+
+    color: #003d80;
+
+
+
+    background-color: #e0e0e0;
+
+
+
+    outline: 2px solid #0056b3;
+
+
+
+    text-decoration: none;
+
+
+
+    transform: translateY(-2px); /* Lifts the link */
+
+
+
 }
 
-/* Content Cards */
-.card { 
-    background: white; 
-    padding: 25px; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02); 
-    margin-bottom: 20px; 
+
+
+
+
+
+
+/* --- Style for the main "Audio" button --- */
+
+
+
+.nav-button {
+
+
+
+    background-color: #0056b3;
+
+
+
+    color: #ffffff;
+
+
+
+    padding: 8px 14px;
+
+
+
+    border-radius: 5px;
+
+
+
+    text-decoration: none;
+
+
+
+    transition: all 0.2s ease-in-out;
+
+
+
 }
 
-h2 { 
-    margin-top: 0; 
-    font-size: 18px; 
-    color: #444; 
-    border-bottom: 1px solid #eee; 
-    padding-bottom: 10px; 
-    margin-bottom: 15px; 
+
+
+
+
+
+
+.nav-button:hover,
+
+
+
+.nav-button:focus {
+
+
+
+    background-color: #003d80;
+
+
+
+    color: #ffffff;
+
+
+
+    transform: translateY(-2px);
+
+
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+
 }
 
-p { 
-    color: #666; 
-    line-height: 1.6; 
-    font-size: 14px; 
-    margin: 0 0 10px 0;
+
+
+
+
+
+
+/* --- NEW: Style for the "Donate" and "Homeschool" buttons --- */
+
+
+
+.donate-button,
+
+
+
+.program-button {
+
+
+
+    background-color: #ffffff;
+
+
+
+    color: #0056b3;
+
+
+
+    font-weight: 600;
+
+
+
+    padding: 6px 12px;
+
+
+
+    border-radius: 5px;
+
+
+
+    text-decoration: none;
+
+
+
+    transition: all 0.2s ease-in-out;
+
+
+
+    border: 2px solid #0056b3; /* The "ring" */
+
+
+
 }
 
-/* Edu Buttons */
-.btn-edu {
-    background: #0056b3; 
-    color: white; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 4px; 
-    cursor: pointer; 
-    font-size: 14px; 
-    margin-top: 10px;
-    transition: background 0.2s;
+
+
+
+
+
+
+.donate-button:hover,
+
+
+
+.donate-button:focus,
+
+
+
+.program-button:hover,
+
+
+
+.program-button:focus {
+
+
+
+    background-color: #0056b3;  /* Invert on hover */
+
+
+
+    color: #ffffff;
+
+
+
+    text-decoration: none;
+
+
+
+    transform: translateY(-2px);
+
+
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+
+
 }
 
-.btn-edu:hover { 
-    background: #004494; 
-}
 
-/* Footer text */
-.edu-footer {
-    position: absolute; 
-    bottom: 10px; 
-    width: 100%; 
-    text-align: center; 
-    color: #999; 
-    font-size: 12px;
-}
 
-/* =========================================
-   LAYER 2: THE PAYLOAD (Game UI)
-   ========================================= */
 
-/* The 3D Canvas */
-canvas { 
-    display: block; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    z-index: 1; 
-    opacity: 0; 
-    transition: opacity 1s; 
-}
 
-/* Heads Up Display */
-#game-ui {
-    display: none; 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    pointer-events: none; 
-    z-index: 10;
-}
 
-.hud-top {
-    display: flex; 
-    justify-content: space-between; 
-    width: 100%; 
-    padding: 30px; 
-    box-sizing: border-box;
-}
 
-.hud-text { 
-    color: #0ff; 
-    font-size: 24px; 
-    font-weight: bold; 
-    text-shadow: 0 0 10px #0ff; 
-    font-family: 'Courier New', Courier, monospace; 
-}
 
-.score-big { 
-    font-size: 40px; 
-    color: #fff; 
-    text-shadow: 0 0 20px #f0f; 
-    font-family: 'Courier New', Courier, monospace; 
-}
 
-/* Game Over Screen */
-#game-over {
-    display: none; 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background: rgba(0,0,0,0.85); 
-    z-index: 20;
-    flex-direction: column; 
-    align-items: center; 
+
+
+/* ======== HERO SECTION STYLES ========
+
+
+
+.hero {
+
+
+
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+
+
+
+    color: #ffffff;
+
+
+
+    padding: 100px 30px;
+
+
+
+    text-align: center;
+
+
+
+}*/
+
+
+
+
+
+
+
+.hero {
+
+
+
+    background-image: url("hero_banner.png");
+
+
+
+    background-size: cover;
+
+
+
+    background-repeat: no-repeat;
+
+
+
+    position: relative;
+
+
+
+    width: 100%;
+
+
+
+    height: 400px;
+
+
+
+    display: flex;
+
+
+
     justify-content: center;
-    font-family: 'Courier New', Courier, monospace;
+
+
+
+    align-items: center;
+
+
+
+    text-align: center;
+
+
+
+    color: rgb(255, 255, 255);
+
+
+
+    box-sizing: border-box;
+
+
+
+    background-position: center center;
+
+
+
+    padding: 20px;
+
+
+
 }
 
-.crash-text { 
-    font-size: 60px; 
-    color: #f00; 
-    text-shadow: 0 0 20px #f00; 
-    font-weight: bold; 
-    margin-bottom: 20px; 
+
+
+
+
+
+
+.hero h1 {
+
+
+
+    margin: 0;
+
+
+
+    font-size: 3.5rem;
+
+
+
+    font-weight: 700;
+
+
+
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+
+
 }
 
-.btn-row { 
-    display: flex; 
-    gap: 20px; 
+
+
+
+
+
+
+.hero-subtitle {
+
+
+
+    font-size: 1.25rem;
+
+
+
+    opacity: 0.9;
+
+
+
+    margin-top: 10px;
+
+
+
 }
 
-.action-btn {
-    padding: 15px 40px; 
-    border: 2px solid #0ff; 
-    background: transparent; 
-    color: #0ff;
-    font-size: 20px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    text-transform: uppercase;
-    transition: all 0.2s;
+
+
+
+
+
+
+/* ======== 3-COLUMN SECTION STYLES ======== */
+
+
+
+.info-columns {
+
+
+
+    padding: 60px 40px;
+
+
+
+    text-align: left;
+
+
+
 }
 
-.action-btn:hover { 
-    background: #0ff; 
-    color: #000; 
-    box-shadow: 0 0 20px #0ff; 
+
+
+
+
+
+
+.columns-container {
+
+
+
+    display: flex;
+
+
+
+    justify-content: center;
+
+
+
+    flex-wrap: wrap;
+
+
+
+    gap: 30px;
+
+
+
+    max-width: 1200px;
+
+
+
+    margin: 0 auto;
+
+
+
 }
 
-/* Visual Effects */
-.scanlines {
-    display: none; /* Only show in game */
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    pointer-events: none;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-    background-size: 100% 4px; 
-    z-index: 9;
+
+
+
+
+
+
+.column {
+
+
+
+    flex-basis: calc(33.333% - 30px);
+
+
+
+    min-width: 300px;
+
+
+
+    background-color: #ffffff;
+
+
+
+    padding: 0;
+
+
+
+    border-radius: 12px;
+
+
+
+    border: 1px solid #ddd;
+
+
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+
+
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+
+
+    overflow: hidden;
+
+
+
+}
+
+
+
+
+
+
+
+.column:hover {
+
+
+
+    transform: translateY(-5px) scale(1.02);
+
+
+
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+
+
+}
+
+
+
+
+
+
+
+.column-image {
+
+
+
+    width: 100%;
+
+
+
+    height: 200px;
+
+
+
+    object-fit: cover;
+
+
+
+    display: block;
+
+
+
+}
+
+
+
+
+
+
+
+.column h2 {
+
+
+
+    margin-top: 0;
+
+
+
+    color: #0056b3;
+
+
+
+    padding: 20px 25px 0 25px;
+
+
+
+}
+
+
+
+
+
+
+
+.column p {
+
+
+
+    padding: 0 25px 25px 25px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ======== GREEN FEATURE SECTION STYLES ======== */
+
+
+
+.green-feature-section {
+
+
+
+    background: linear-gradient(135deg, #1d976c, #93f9b9);
+
+
+
+    color: #ffffff;
+
+
+
+    padding: 60px 40px;
+
+
+
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+
+
+}
+
+
+
+
+
+
+
+.feature-container {
+
+
+
+    display: flex;
+
+
+
+    justify-content: center;
+
+
+
+    flex-wrap: wrap;
+
+
+
+    gap: 30px;
+
+
+
+    max-width: 1200px;
+
+
+
+    margin: 0 auto;
+
+
+
+}
+
+
+
+
+
+
+
+.feature-left {
+
+
+
+    flex: 1;
+
+
+
+    min-width: 300px;
+
+
+
+}
+
+
+
+
+
+
+
+.feature-right {
+
+
+
+    flex: 2;
+
+
+
+    min-width: 300px;
+
+
+
+}
+
+
+
+
+
+
+
+.feature-left h2 {
+
+
+
+    font-size: 3rem;
+
+
+
+    font-weight: 700;
+
+
+
+    margin: 0;
+
+
+
+    line-height: 1.2;
+
+
+
+}
+
+
+
+
+
+
+
+.feature-right h3 {
+
+
+
+    font-size: 1.5rem;
+
+
+
+    font-weight: 700;
+
+
+
+    margin-top: 0;
+
+
+
+    margin-bottom: 10px;
+
+
+
+    opacity: 0.9;
+
+
+
+}
+
+
+
+
+
+
+
+.feature-right p {
+
+
+
+    margin: 0;
+
+
+
+    font-size: 1.1rem;
+
+
+
+}
+
+
+
+
+
+
+
+/* ======== HOMESCHOOL APP STYLES ======== */
+
+
+
+#homeschool-app-container {
+
+
+
+    padding: 60px 30px;
+
+
+
+    background-color: transparent; /* Makes sure no extra background is here */
+
+
+
+}
+
+
+
+
+
+
+
+.app-content {
+
+
+
+    max-width: 800px;
+
+
+
+    margin: 0 auto;
+
+
+
+    background: #ffffff;
+
+
+
+    border-radius: 16px;
+
+
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+
+
+    padding: 40px;
+
+
+
+    overflow: hidden;
+
+
+
+}
+
+
+
+
+
+
+
+.app-logo {
+
+
+
+    display: block;
+
+
+
+    max-height: 60px;
+
+
+
+    width: auto;
+
+
+
+    margin: 0 auto 20px;
+
+
+
+}
+
+
+
+
+
+
+
+.app-screen {
+
+
+
+    display: none;
+
+
+
+}
+
+
+
+
+
+
+
+.app-screen.active {
+
+
+
+    display: block;
+
+
+
+}
+
+
+
+
+
+
+
+/* --- APP BUTTONS --- */
+
+
+
+.app-button, .app-button-secondary, .app-button-danger {
+
+
+
+    display: block;
+
+
+
+    width: 100%;
+
+
+
+    font-family: 'Poppins', sans-serif;
+
+
+
+    font-size: 1rem;
+
+
+
+    font-weight: 600;
+
+
+
+    padding: 12px 20px;
+
+
+
+    border: none;
+
+
+
+    border-radius: 8px;
+
+
+
+    cursor: pointer;
+
+
+
+    margin-top: 15px;
+
+
+
+    transition: all 0.2s ease;
+
+
+
+}
+
+
+
+
+
+
+
+.app-button {
+
+
+
+    background: linear-gradient(135deg, #0056b3 0%, #007bff 100%);
+
+
+
+    color: white;
+
+
+
+    box-shadow: 0 4px 10px rgba(0, 86, 179, 0.2);
+
+
+
+}
+
+
+
+
+
+
+
+.app-button:hover {
+
+
+
+    transform: translateY(-2px);
+
+
+
+    box-shadow: 0 6px 15px rgba(0, 86, 179, 0.3);
+
+
+
+}
+
+
+
+
+
+
+
+.app-button-secondary {
+
+
+
+    background-color: #e0e0e0;
+
+
+
+    color: #333;
+
+
+
+}
+
+
+
+
+
+
+
+.app-button-secondary:hover {
+
+
+
+    background-color: #cccccc;
+
+
+
+}
+
+
+
+
+
+
+
+.app-button-danger {
+
+
+
+    background: linear-gradient(135deg, #d90429 0%, #ef233c 100%);
+
+
+
+    color: white;
+
+
+
+}
+
+
+
+
+
+
+
+.app-button-danger:hover {
+
+
+
+    transform: translateY(-2px);
+
+
+
+    box-shadow: 0 6px 15px rgba(217, 4, 41, 0.3);
+
+
+
+}
+
+
+
+
+
+
+
+.menu-buttons, .year-buttons {
+
+
+
+    display: grid;
+
+
+
+    grid-template-columns: 1fr 1fr;
+
+
+
+    gap: 15px;
+
+
+
+}
+
+
+
+
+
+
+
+/* --- APP INPUTS --- */
+
+
+
+.app-label {
+
+
+
+    font-weight: 600;
+
+
+
+    margin-top: 15px;
+
+
+
+    display: block;
+
+
+
+}
+
+
+
+
+
+
+
+.app-input, #student-select {
+
+
+
+    width: 100%;
+
+
+
+    padding: 12px;
+
+
+
+    margin-top: 5px;
+
+
+
+    border: 2px solid #ddd;
+
+
+
+    border-radius: 8px;
+
+
+
+    font-family: 'Poppins', sans-serif;
+
+
+
+    font-size: 1rem;
+
+
+
+    transition: border-color 0.2s ease;
+
+
+
+}
+
+
+
+
+
+
+
+.app-input:focus, #student-select:focus {
+
+
+
+    border-color: #0056b3;
+
+
+
+    outline: none;
+
+
+
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+
+
+
+}
+
+
+
+
+
+
+
+/* --- Quiz Styles --- */
+
+
+
+#activity-result.correct {
+
+
+
+    color: #28a745;
+
+
+
+    font-weight: 600;
+
+
+
+    font-size: 1.2rem;
+
+
+
+}
+
+
+
+#activity-result.wrong {
+
+
+
+    color: #d90429;
+
+
+
+    font-weight: 600;
+
+
+
+    font-size: 1.2rem;
+
+
+
+}
+
+
+
+.spelling-input {
+
+
+
+    width: 100%;
+
+
+
+    padding: 12px;
+
+
+
+    margin: 10px 0;
+
+
+
+    border: 2px solid #dddddd;
+
+
+
+    border-radius: 8px;
+
+
+
+    font-family: 'Poppins', sans-serif;
+
+
+
+    font-size: 1.2rem;
+
+
+
+    text-align: center;
+
+
+
+    letter-spacing: 3px;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ======== FOOTER STYLES ======== */
+
+
+
+footer {
+
+
+
+    /* --- IMPROVEMENT: Softer, more modern footer --- */
+
+
+
+    background-color: #2a2a2a;
+
+
+
+    color: #aaaaaa;
+
+
+
+    text-align: center;
+
+
+
+    padding: 40px 30px;
+
+
+
+    margin-top: 0;
+
+
+
 }
