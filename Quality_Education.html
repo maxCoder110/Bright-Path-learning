@@ -2,106 +2,318 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrightPath Arcade</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>CYBER PORTAL // SYSTEM ROOT</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #050505;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-image: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 50px;
-            text-shadow: 0 0 20px #00ffff;
-            color: #00ffff;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
-        .game-container {
-            display: flex;
-            gap: 50px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .game-card {
-            width: 300px;
-            height: 400px;
-            background: #111;
-            border: 2px solid #333;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-        }
-        .game-card:hover {
-            transform: translateY(-10px);
-        }
-        .game-card.neon-cycle:hover {
-            box-shadow: 0 0 30px #00ffcc;
-            border-color: #00ffcc;
-        }
-        .game-card.neon-warfare:hover {
-            box-shadow: 0 0 30px #ff0055;
-            border-color: #ff0055;
-        }
-        .game-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-            z-index: 2;
-        }
-        .play-btn {
-            padding: 10px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            z-index: 2;
-        }
-        .neon-cycle .play-btn { background: #00ffcc; color: #000; }
-        .neon-warfare .play-btn { background: #ff0055; color: white; }
+        body { margin: 0; overflow: hidden; background: #000; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         
-        .back-link {
-            margin-top: 50px;
-            color: #888;
-            text-decoration: none;
+        /* --- GLOBAL LAYOUT --- */
+        #container { position: relative; width: 100vw; height: 100vh; }
+        
+        /* CRT SCANLINES & VIGNETTE (Visual Polish) */
+        .scanlines {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px; z-index: 100;
         }
-        .back-link:hover { color: white; }
+        .vignette {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
+            background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%); z-index: 101;
+        }
+
+        /* --- HOME PAGE / DASHBOARD --- */
+        #home-page {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+            padding-left: 10%; box-sizing: border-box;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.4); /* Slight dim for background visibility */
+            transition: opacity 0.5s;
+        }
+
+        h1.logo {
+            font-size: 100px; margin: 0; line-height: 0.9;
+            color: transparent; -webkit-text-stroke: 2px #fff;
+            text-transform: uppercase; font-style: italic;
+            filter: drop-shadow(0 0 10px #0ff);
+        }
+        h1.logo span {
+            display: block; color: #0ff; -webkit-text-stroke: 0;
+            text-shadow: 0 0 20px #0ff;
+        }
+
+        .nav-menu { margin-top: 50px; display: flex; flex-direction: column; gap: 20px; }
+        
+        .nav-btn {
+            background: transparent; border: none; text-align: left;
+            font-size: 30px; color: #555; font-weight: 900; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s; padding-left: 20px; border-left: 5px solid transparent;
+        }
+        .nav-btn:hover {
+            color: #fff; padding-left: 40px; border-left: 5px solid #f0f;
+            text-shadow: 0 0 10px #f0f;
+        }
+
+        /* --- GAME HUD (Hidden by default) --- */
+        #game-ui {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10;
+        }
+        .hud-top {
+            display: flex; justify-content: space-between; width: 100%; padding: 30px; box-sizing: border-box;
+        }
+        .hud-text { color: #0ff; font-size: 24px; font-weight: bold; text-shadow: 0 0 10px #0ff; }
+        .score-big { font-size: 40px; color: #fff; text-shadow: 0 0 20px #f0f; }
+
+        /* --- GAME OVER SCREEN --- */
+        #game-over {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 20;
+            flex-direction: column; align-items: center; justify-content: center;
+        }
+        .crash-text { font-size: 60px; color: #f00; text-shadow: 0 0 20px #f00; font-weight: bold; margin-bottom: 20px; }
+        .btn-row { display: flex; gap: 20px; }
+        .action-btn {
+            padding: 15px 40px; border: 2px solid #0ff; background: transparent; color: #0ff;
+            font-size: 20px; font-weight: bold; cursor: pointer; text-transform: uppercase;
+            transition: 0.2s;
+        }
+        .action-btn:hover { background: #0ff; color: #000; box-shadow: 0 0 20px #0ff; }
+
     </style>
 </head>
 <body>
 
-    <h1>BrightPath Arcade</h1>
+<div id="container">
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
 
-    <div class="game-container">
-        <a href="game-cycle.html" class="game-card neon-cycle">
-            <div class="game-title" style="color: #00ffcc;">NEON CYCLE<br>GRID WARS</div>
-            <div class="play-btn">Play Now</div>
-        </a>
-
-        <a href="game-warfare.html" class="game-card neon-warfare">
-            <div class="game-title" style="color: #ff0055;">NEON WARFARE<br>SAGA</div>
-            <div class="play-btn">Play Now</div>
-        </a>
+    <div id="home-page">
+        <h1 class="logo">CYBER<span>PORTAL</span></h1>
+        <div class="nav-menu">
+            <button class="nav-btn" onclick="launchGame()">// LAUNCH PROTOCOL</button>
+            <button class="nav-btn" onclick="alert('ACCESS DENIED: CLEARANCE LEVEL TOO LOW')">// SYSTEM LOGS</button>
+            <button class="nav-btn" onclick="alert('SETTINGS LOCKED BY ADMINISTRATOR')">// SETTINGS</button>
+        </div>
+        <p style="position: absolute; bottom: 20px; color: #444; font-size: 12px;">SYSTEM ID: GEMINI-UNFILTERED-V2</p>
     </div>
 
-    <a href="index.html" class="back-link">← Back to Main Website</a>
+    <div id="game-ui">
+        <div class="hud-top">
+            <div class="hud-text">VELOCITY: <span id="hud-speed">0</span> KM/H</div>
+            <div class="score-big" id="hud-score">000000</div>
+        </div>
+    </div>
 
+    <div id="game-over">
+        <div class="crash-text">SYSTEM FAILURE</div>
+        <p style="color: #fff; margin-bottom: 30px; font-size: 20px;">DISTANCE TRAVELED: <span id="final-score">0</span></p>
+        <div class="btn-row">
+            <button class="action-btn" onclick="resetGame()">REBOOT SYSTEM</button>
+            <button class="action-btn" style="border-color: #555; color: #555;" onclick="goHome()">RETURN TO BASE</button>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.158.0/build/three.module.js';
+
+    // --- SYSTEM CONFIG ---
+    const CONFIG = {
+        gridSpeed: 0.5,
+        fogColor: 0x050011,
+        gridColor: 0xff00ff,
+        shipColor: 0x00ffff
+    };
+
+    // --- APPLICATION STATE ---
+    let appState = 'HOME'; // HOME, PLAYING, GAMEOVER
+    let score = 0;
+    let speed = 0;
+    let frame = 0;
+
+    // --- SCENE SETUP ---
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(CONFIG.fogColor);
+    scene.fog = new THREE.FogExp2(CONFIG.fogColor, 0.02);
+
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    document.body.appendChild(renderer.domElement);
+
+    // --- ASSETS ---
+    const gridGeo = new THREE.PlaneGeometry(200, 200, 40, 40);
+    const gridMat = new THREE.MeshBasicMaterial({ color: CONFIG.gridColor, wireframe: true, transparent: true, opacity: 0.2 });
+    const grid1 = new THREE.Mesh(gridGeo, gridMat);
+    const grid2 = new THREE.Mesh(gridGeo, gridMat);
+    grid1.rotation.x = -Math.PI/2; grid1.position.z = -50;
+    grid2.rotation.x = -Math.PI/2; grid2.position.z = -250;
+    scene.add(grid1); scene.add(grid2);
+
+    // Sun
+    const sun = new THREE.Mesh(
+        new THREE.CircleGeometry(40, 64),
+        new THREE.MeshBasicMaterial({ color: 0xff0055 })
+    );
+    sun.position.set(0, 10, -150);
+    scene.add(sun);
+
+    // Ship
+    const shipGroup = new THREE.Group();
+    const shipBody = new THREE.Mesh(
+        new THREE.ConeGeometry(0.5, 2, 4).rotateX(Math.PI/2).rotateY(Math.PI/4),
+        new THREE.MeshStandardMaterial({ color: 0x111111, emissive: CONFIG.shipColor, emissiveIntensity: 1 })
+    );
+    shipGroup.add(shipBody);
+    scene.add(shipGroup);
+
+    // Lights
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const pLight = new THREE.PointLight(CONFIG.shipColor, 2, 10);
+    pLight.position.set(0, 1, 0);
+    scene.add(pLight);
+
+    // Obstacles
+    const obstacles = [];
+    const obstaclePool = []; // Optimization: Object Pooling could go here, but keep it simple for now
+
+    // --- INPUT ---
+    const mouse = new THREE.Vector2();
+    document.addEventListener('mousemove', (e) => {
+        mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    // --- NAVIGATION FUNCTIONS (Global Scope) ---
+    window.launchGame = function() {
+        appState = 'PLAYING';
+        document.getElementById('home-page').style.display = 'none';
+        document.getElementById('game-ui').style.display = 'block';
+        resetGameLogic();
+    };
+
+    window.resetGame = function() {
+        document.getElementById('game-over').style.display = 'none';
+        launchGame();
+    };
+
+    window.goHome = function() {
+        appState = 'HOME';
+        document.getElementById('game-over').style.display = 'none';
+        document.getElementById('game-ui').style.display = 'none';
+        document.getElementById('home-page').style.display = 'flex';
+        
+        // Reset camera for attract mode
+        camera.position.set(0, 3, 5);
+        camera.rotation.set(0,0,0);
+        
+        // Clear field
+        obstacles.forEach(o => scene.remove(o));
+        obstacles.length = 0;
+    };
+
+    function resetGameLogic() {
+        score = 0;
+        speed = 1.0;
+        shipGroup.position.set(0, 0.5, 0);
+        shipGroup.rotation.set(0, 0, 0);
+        camera.position.set(0, 3, 5);
+        camera.rotation.set(0,0,0); // Reset rotation from any attract mode
+        
+        obstacles.forEach(o => scene.remove(o));
+        obstacles.length = 0;
+    }
+
+    function spawnObstacle() {
+        const geo = new THREE.BoxGeometry(Math.random()>0.5?1:4, Math.random()>0.5?8:1, 1);
+        const mat = new THREE.MeshStandardMaterial({ color: 0x000, emissive: 0xff0000, emissiveIntensity: 2 });
+        const obs = new THREE.Mesh(geo, mat);
+        obs.position.set((Math.random()-0.5)*30, 0.5, -100);
+        if(geo.parameters.height > 2) obs.position.y = 4; // Floating pillar
+        scene.add(obs);
+        obstacles.push(obs);
+    }
+
+    function triggerCrash() {
+        appState = 'GAMEOVER';
+        document.getElementById('final-score').innerText = Math.floor(score);
+        document.getElementById('game-over').style.display = 'flex';
+        document.getElementById('game-ui').style.display = 'none';
+    }
+
+    // --- MAIN LOOP ---
+    function animate() {
+        requestAnimationFrame(animate);
+        frame++;
+
+        // GLOBAL BACKGROUND ANIMATION (Always runs)
+        const gridVel = appState === 'PLAYING' ? 0.5 * speed : 0.2; // Slow in menu, fast in game
+        grid1.position.z += gridVel;
+        grid2.position.z += gridVel;
+        if(grid1.position.z > 150) grid1.position.z = -250;
+        if(grid2.position.z > 150) grid2.position.z = -250;
+
+        // STATE: HOME (Attract Mode)
+        if(appState === 'HOME') {
+            // Circle the camera around the ship slightly
+            camera.position.x = Math.sin(frame * 0.005) * 5;
+            camera.position.z = 5 + Math.cos(frame * 0.005) * 2;
+            camera.lookAt(0, 0, -20);
+            
+            // Idle ship wobble
+            shipGroup.rotation.z = Math.sin(frame * 0.02) * 0.1;
+            shipGroup.rotation.x = Math.sin(frame * 0.03) * 0.1;
+        }
+
+        // STATE: PLAYING
+        if(appState === 'PLAYING') {
+            // Difficulty
+            speed += 0.0005;
+            score += speed;
+
+            // Player Control
+            const targetX = mouse.x * 15;
+            shipGroup.position.x += (targetX - shipGroup.position.x) * 0.1;
+            shipGroup.rotation.z = -(targetX - shipGroup.position.x) * 0.1; // Bank
+
+            // Obstacles
+            if(frame % Math.floor(50/speed) === 0) spawnObstacle();
+
+            for(let i=obstacles.length-1; i>=0; i--) {
+                const o = obstacles[i];
+                o.position.z += gridVel;
+
+                // Collision
+                const dx = Math.abs(o.position.x - shipGroup.position.x);
+                const dz = Math.abs(o.position.z - shipGroup.position.z);
+                const w = o.geometry.parameters.width/2 + 0.5;
+                
+                if(dz < 1 && dx < w) {
+                   triggerCrash();
+                }
+
+                if(o.position.z > 10) {
+                    scene.remove(o);
+                    obstacles.splice(i,1);
+                }
+            }
+            
+            // UI Update
+            document.getElementById('hud-score').innerText = Math.floor(score).toString().padStart(6,'0');
+            document.getElementById('hud-speed').innerText = Math.floor(speed * 100);
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth/window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    animate();
+</script>
 </body>
 </html>
