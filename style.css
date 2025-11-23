@@ -208,3 +208,212 @@ nav ul {
 
 .column:hover .column-image {
     transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.column-text {
+    padding: 25px;
+    flex-grow: 1; /* Makes sure text area fills height */
+}
+
+.column h2 {
+    margin-top: 0;
+    color: #0056b3;
+    font-size: 1.5rem;
+}
+
+/* ======== GREEN FEATURE SECTION ======== */
+.green-feature-section {
+    background: linear-gradient(135deg, #1d976c, #93f9b9);
+    color: #ffffff;
+    padding: 80px 40px;
+}
+
+.feature-container {
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature-left {
+    flex: 1;
+    min-width: 280px;
+    border-right: 2px solid rgba(255,255,255,0.3); /* Visual separator */
+}
+
+.feature-right {
+    flex: 2;
+    min-width: 300px;
+}
+
+.feature-left h2 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin: 0;
+}
+
+/* ======== HOMESCHOOL APP SECTION ======== */
+#homeschool-app-container {
+    padding: 80px 20px;
+    background-color: #e9ecef; /* Distinct background for App Area */
+    border-top: 1px solid #ddd;
+}
+
+.app-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.app-header h3 {
+    margin: 0;
+    color: #0056b3;
+    font-size: 2rem;
+}
+
+.app-content {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    min-height: 400px; /* Prevents jumping when screens change */
+    position: relative;
+}
+
+.app-screen {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.app-screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* App Inputs */
+.app-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.app-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border 0.2s;
+}
+
+.app-input:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* App Buttons */
+.app-button, .app-button-secondary, .app-button-danger {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s;
+}
+
+.app-button {
+    background-color: #0056b3;
+    color: white;
+}
+
+.app-button:hover {
+    background-color: #004494;
+}
+
+.app-button-secondary {
+    background-color: #f1f3f5;
+    color: #333;
+}
+
+.app-button-danger {
+    background-color: #fff0f0;
+    color: #d63031;
+    border: 1px solid #d63031;
+}
+
+.menu-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.menu-button {
+    height: 100px; /* Larger click targets for touch */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #aaa;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* ======== FOOTER ======== */
+footer {
+    background-color: #222;
+    color: #888;
+    text-align: center;
+    padding: 40px;
+    font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .feature-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .feature-left {
+        border-right: none;
+        border-bottom: 2px solid rgba(255,255,255,0.3);
+        padding-bottom: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
