@@ -1,116 +1,242 @@
-/* ========================================= */
-/* === NEW: GAMES HUB & NAV STYLES === */
-/* ========================================= */
-
-/* The specific button in the Nav Bar */
-.games-nav-button {
-    background-color: #ff0055; /* Neon Pink */
-    color: #ffffff;
-    font-weight: 700;
-    padding: 8px 14px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    border: 2px solid #ff0055;
-    margin-right: 15px; /* Spacing from Donate button */
+/* --- GLOBAL RESET --- */
+body { 
+    margin: 0; 
+    overflow: hidden; 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    background-color: #000; /* Default to black for the game */
 }
 
-.games-nav-button:hover {
-    background-color: transparent;
-    color: #ff0055;
-    box-shadow: 0 0 15px #ff0055;
-    transform: translateY(-2px);
-}
+/* =========================================
+   LAYER 1: THE DISGUISE (Educational Theme)
+   ========================================= */
 
-/* Styles for the games.html body */
-.games-hub-body {
-    background-color: #050505;
-    background-image: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-    color: white;
-    display: flex;
+#edu-layer {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: #f4f7f6; 
+    color: #333; 
+    z-index: 50;
+    display: flex; 
     flex-direction: column;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Header */
+header {
+    background: #ffffff;
+    border-bottom: 3px solid #0056b3;
+    padding: 20px 40px;
+    display: flex; 
+    justify-content: space-between; 
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.games-hub-title {
-    font-size: 3.5rem;
-    margin-bottom: 50px;
-    text-shadow: 0 0 20px #00ffff;
-    color: #00ffff;
+.logo { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #0056b3; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+.logo span { 
+    color: #f5a623; /* Bright Path "Sun" color */
+}
+
+/* Navigation */
+nav { 
+    display: flex; 
+    gap: 30px; 
+}
+
+nav a { 
+    text-decoration: none; 
+    color: #555; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: color 0.2s; 
+}
+
+nav a:hover { 
+    color: #0056b3; 
+}
+
+/* Dashboard Layout */
+.dashboard { 
+    padding: 40px; 
+    display: grid; 
+    grid-template-columns: 2fr 1fr; 
+    gap: 30px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+/* Content Cards */
+.card { 
+    background: white; 
+    padding: 25px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02); 
+    margin-bottom: 20px; 
+}
+
+h2 { 
+    margin-top: 0; 
+    font-size: 18px; 
+    color: #444; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px; 
+    margin-bottom: 15px; 
+}
+
+p { 
+    color: #666; 
+    line-height: 1.6; 
+    font-size: 14px; 
+    margin: 0 0 10px 0;
+}
+
+/* Edu Buttons */
+.btn-edu {
+    background: #0056b3; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn-edu:hover { 
+    background: #004494; 
+}
+
+/* Footer text */
+.edu-footer {
+    position: absolute; 
+    bottom: 10px; 
+    width: 100%; 
+    text-align: center; 
+    color: #999; 
+    font-size: 12px;
+}
+
+/* =========================================
+   LAYER 2: THE PAYLOAD (Game UI)
+   ========================================= */
+
+/* The 3D Canvas */
+canvas { 
+    display: block; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    z-index: 1; 
+    opacity: 0; 
+    transition: opacity 1s; 
+}
+
+/* Heads Up Display */
+#game-ui {
+    display: none; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 10;
+}
+
+.hud-top {
+    display: flex; 
+    justify-content: space-between; 
+    width: 100%; 
+    padding: 30px; 
+    box-sizing: border-box;
+}
+
+.hud-text { 
+    color: #0ff; 
+    font-size: 24px; 
+    font-weight: bold; 
+    text-shadow: 0 0 10px #0ff; 
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+.score-big { 
+    font-size: 40px; 
+    color: #fff; 
+    text-shadow: 0 0 20px #f0f; 
+    font-family: 'Courier New', Courier, monospace; 
+}
+
+/* Game Over Screen */
+#game-over {
+    display: none; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.85); 
+    z-index: 20;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.crash-text { 
+    font-size: 60px; 
+    color: #f00; 
+    text-shadow: 0 0 20px #f00; 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+}
+
+.btn-row { 
+    display: flex; 
+    gap: 20px; 
+}
+
+.action-btn {
+    padding: 15px 40px; 
+    border: 2px solid #0ff; 
+    background: transparent; 
+    color: #0ff;
+    font-size: 20px; 
+    font-weight: bold; 
+    cursor: pointer; 
     text-transform: uppercase;
-    letter-spacing: 5px;
-    text-align: center;
+    transition: all 0.2s;
 }
 
-.games-container {
-    display: flex;
-    gap: 50px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
+.action-btn:hover { 
+    background: #0ff; 
+    color: #000; 
+    box-shadow: 0 0 20px #0ff; 
 }
 
-/* The Cards for each game */
-.game-card {
-    width: 320px;
-    height: 450px;
-    background: #111;
-    border: 2px solid #333;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    position: relative;
-    overflow: hidden;
+/* Visual Effects */
+.scanlines {
+    display: none; /* Only show in game */
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    pointer-events: none;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px; 
+    z-index: 9;
 }
-
-.game-card:hover {
-    transform: translateY(-10px);
-}
-
-.game-card h2 {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 20px;
-    z-index: 2;
-    padding: 0 10px;
-}
-
-.play-btn {
-    padding: 12px 35px;
-    border-radius: 50px;
-    font-weight: bold;
-    text-transform: uppercase;
-    z-index: 2;
-    transition: 0.3s;
-}
-
-/* Specific Game Theming */
-.card-neon-cycle {
-    border-color: #0088cc;
-}
-.card-neon-cycle h2 { color: #00ffcc; text-shadow: 0 0 10px #00ffcc; }
-.card-neon-cycle .play-btn { background: #00ffcc; color: #000; }
-.card-neon-cycle:hover { box-shadow: 0 0 40px rgba(0, 255, 204, 0.4); }
-
-.card-neon-warfare {
-    border-color: #880022;
-}
-.card-neon-warfare h2 { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
-.card-neon-warfare .play-btn { background: #ff0055; color: white; }
-.card-neon-warfare:hover { box-shadow: 0 0 40px rgba(255, 0, 85, 0.4); }
-
-.back-link {
-    margin-top: 60px;
-    color: #888;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s;
-}
-.back-link:hover { color: white; }
